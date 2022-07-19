@@ -136,7 +136,7 @@ class AutoEncoder(BaseDetector):
 
     def __init__(self, hidden_neurons=None,
                  hidden_activation='relu', output_activation='sigmoid',
-                 loss=mean_squared_error, optimizer='adam',
+                 loss=mean_squared_error, optimizer='adam', 
                  epochs=100, batch_size=32, dropout_rate=0.2,
                  l2_regularizer=0.1, validation_size=0.1, preprocessing=True,
                  verbose=1, random_state=None, contamination=0.1):
