@@ -9,6 +9,7 @@ from __future__ import print_function
 
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.optimizers import Adam
 from sklearn.utils import check_array
 from sklearn.utils.validation import check_is_fitted
 
@@ -136,7 +137,7 @@ class AutoEncoder(BaseDetector):
 
     def __init__(self, hidden_neurons=None,
                  hidden_activation='relu', output_activation='sigmoid',
-                 loss=mean_squared_error, optimizer='adam', 
+                 loss=mean_squared_error, optimizer='adam', learning_rate = 0.001,
                  epochs=100, batch_size=32, dropout_rate=0.2,
                  l2_regularizer=0.1, validation_size=0.1, preprocessing=True,
                  verbose=1, random_state=None, contamination=0.1):
@@ -146,6 +147,7 @@ class AutoEncoder(BaseDetector):
         self.output_activation = output_activation
         self.loss = loss
         self.optimizer = optimizer
+        self.learning_rate = learning_rate
         self.epochs = epochs
         self.batch_size = batch_size
         self.dropout_rate = dropout_rate
@@ -158,6 +160,10 @@ class AutoEncoder(BaseDetector):
         # default values
         if self.hidden_neurons is None:
             self.hidden_neurons = [64, 32, 32, 64]
+
+        # learning_rate inclusion
+        if self.optimizer == 'adam':
+            self.optimizer = Adam(learning_rate=self.learning_rate)
 
         # Verify the network design is valid
         if not self.hidden_neurons == self.hidden_neurons[::-1]:
