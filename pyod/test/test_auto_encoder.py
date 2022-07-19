@@ -34,7 +34,7 @@ class TestAutoEncoder(unittest.TestCase):
             n_features=self.n_features, contamination=self.contamination,
             random_state=42)
 
-        self.clf = AutoEncoder(epochs=5, contamination=self.contamination, learning_rate=0.000001)
+        self.clf = AutoEncoder(epochs=5, contamination=self.contamination, learning_rate=0.001)
         self.clf.fit(self.X_train)
 
     def test_parameters(self):
